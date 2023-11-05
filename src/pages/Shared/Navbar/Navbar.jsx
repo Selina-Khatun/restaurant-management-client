@@ -1,26 +1,24 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import './Navbar.css';
 
 const Navbar = () => {
+
+
     const navLinks = <>
 
-<li ><NavLink className='mr-10 font-bold' to={"/"}>Home</NavLink></li>
-<li ><NavLink className='mr-10 font-bold' to={"/allFoodItems"}>All Food Items</NavLink></li>
-<li ><NavLink className='mr-10 font-bold' to={"/blog"}>Blog</NavLink></li>
-<li ><NavLink className='mr-10 font-bold' to={"/registration"}>Registration</NavLink></li>
-<li ><NavLink className='mr-10 font-bold' to={"/login"}>Login</NavLink></li>
-
-
+        <li ><NavLink className='mr-10 font-bold' to={"/"}>Home</NavLink></li>
+        <li ><NavLink className='mr-10 font-bold' to={"/allFoodItems"}>All Food Items</NavLink></li>
+        <li ><NavLink className='mr-10 font-bold' to={"/blog"}>Blog</NavLink></li>
+        <li ><NavLink className='mr-10 font-bold' to={"/registration"}>Registration</NavLink></li>
+        {/* <li ><NavLink className='mr-10 font-bold' to={"/login"}>Login</NavLink></li> */}
 
     </>
-    // <li className='mr-10' ><NavLink to={'/'}>Home</NavLink></li>
-    // <li className='mr-10'><NavLink to={'/services'}>Services</NavLink></li>
-    // <li className='mr-10'><NavLink to={'/about'}>About</NavLink></li>
-    // <li className='mr-10'><NavLink to={'/register'}>Register</NavLink></li>
+
 
     return (
         <div>
-            <div className="navbar bg-base-100">
+            <nav className=" navbar sticky top-0 pt-5 shadow-2xl  bg-base-100 z-100">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -30,17 +28,20 @@ const Navbar = () => {
                             {navLinks}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+                    <img className='w-[29%] ml-10 animate-bounce' src="https://i.ibb.co/ydQrpfS/logo-dark.png" alt="" />
+                    <div>
+                        <img className='w-[20%] animate-bounce' src="https://i.ibb.co/vH0C4ys/well-new-logo.png" alt="" />
+                    </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                       {navLinks}
+                        {navLinks}
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    <NavLink className='mr-10 font-bold' to={"/login"}>Login</NavLink>
                 </div>
-            </div>
+            </nav>
         </div>
     );
 };

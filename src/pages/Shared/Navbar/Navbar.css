@@ -1,0 +1,9 @@
+.sticky-navbar {
+    position: sticky;
+    top: 0;
+    background-color: #fff; 
+    z-index: 100; 
+  }
+  /* .navbar{
+    background-color: aqua;
+  } */
