@@ -19,10 +19,10 @@ const Navbar = () => {
 
     const navLinks = <>
 
-        <li ><NavLink className='mr-10 font-bold' to={"/"}>Home</NavLink></li>
-        <li ><NavLink className='mr-10 font-bold' to={"/allFoodItems"}>All Food Items</NavLink></li>
-        <li ><NavLink className='mr-10 font-bold' to={"/blog"}>Blog</NavLink></li>
-        <li ><NavLink className='mr-10 font-bold' to={"/registration"}>Registration</NavLink></li>
+        <li ><NavLink className='mr-10 font-bold uppercase' to={"/"}>Home</NavLink></li>
+        <li ><NavLink className='mr-10 font-bold uppercase' to={"/allFoodItems"}>All Food Items</NavLink></li>
+        <li ><NavLink className='mr-10 font-bold uppercase' to={"/blog"}>Blog</NavLink></li>
+        <li ><NavLink className='mr-10 font-bold uppercase btn-outline ' to={"/registration"}>Registration</NavLink></li>
         {/* <li ><NavLink className='mr-10 font-bold' to={"/login"}>Login</NavLink></li> */}
 
     </>
