@@ -1,12 +1,53 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Provider/AuthProvider';
+import swal from 'sweetalert';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+AOS.init({ duration: 1000 });
 const Login = () => {
+    const { signIn, user } = useContext(AuthContext);
+    const { googleSignIn } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState();
+    const handleSignIn = event => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+        signIn(email, password)
+            .then(result => {
+                console.log(result.user);
+                if (result.user) {
+                    swal("Successfully logged in.");
+                    navigate(location?.state ? location.state : '/');
+                }
+            })
+
+            .catch((error) => {
+                console.error(error);
+                swal('Invalid email or password. Please try again.');
+                form.reset('');
+            });
+    }
+
+    const handleGoogle = () => {
+        googleSignIn().then(result => {
+            const loggedUser = result.user
+            console.log(loggedUser);
+            navigate(location?.state ? location.state : '/');
+            swal("Successfully logged in.")
+        });
+    };
+
     return (
 
-        <div className="flex items-center min-h-screen p-4 bg-gray-100 lg:justify-center">
+        <div data-aos="zoom-in-up" className="  flex items-center min-h-screen p-4 bg-gray-100 lg:justify-center">
             <div
                 className="flex flex-col overflow-hidden bg-white rounded-md shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-md"
             >
@@ -17,10 +58,10 @@ const Login = () => {
                         <img className=' transition duration-500 ease-in-out hover:scale-150' src="https://i.ibb.co/ydQrpfS/logo-dark.png" alt="" />
                     </div>
                     <p className="mt-6 font-normal text-center text-white md:mt-0 animate-pulse">
-                    login to know our latest news updates about our offers, recipes and events. One cannot think well, love well, sleep well, if one has not dined well.
+                        login to know our latest news updates about our offers, recipes and events. One cannot think well, love well, sleep well, if one has not dined well.
                     </p>
                     <div className="text-sm font-medium text-white dark:text-gray-300">
-                        Don't have an account? <Link to={"/login"}
+                        Don't have an account? <Link to={"/registration"}
                             className="font-medium  transition-colors text-rose-200 hover:text-blue-700"
 
                         >
@@ -34,23 +75,24 @@ const Login = () => {
                 </div>
                 <div className="p-5 bg-white md:flex-1">
                     <h3 className="my-4 text-2xl font-semibold text-gray-700">Account Login</h3>
-                    <form action="#" className="flex flex-col space-y-5">
+                    <form onSubmit={handleSignIn} className="flex flex-col space-y-5">
                         <div className="flex flex-col space-y-1">
                             <label htmlFor="email" className="text-sm font-semibold text-gray-500">Email address</label>
                             <input
                                 type="email"
                                 name='email'
                                 id="email"
+                                placeholder='email'
                                 autoFocus
                                 className="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200" required
                             />
                         </div>
                         <div className=' relative'>
-                                    <input type={showPassword ? 'text' : 'password'} name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
-                                    <span className=' absolute top-3 right-2' onClick={() => setShowPassword(!showPassword)}>
-                                        {showPassword ? <AiFillEye></AiFillEye> : <AiFillEyeInvisible></AiFillEyeInvisible>}
-                                    </span>
-                                </div>
+                            <input type={showPassword ? 'text' : 'password'} name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                            <span className=' absolute top-3 right-2' onClick={() => setShowPassword(!showPassword)}>
+                                {showPassword ? <AiFillEye></AiFillEye> : <AiFillEyeInvisible></AiFillEyeInvisible>}
+                            </span>
+                        </div>
                         <div className="flex items-center space-x-2">
                             <input
                                 type="checkbox"
@@ -74,12 +116,12 @@ const Login = () => {
                                 <span className="h-px bg-gray-400 w-14"></span>
                             </span>
                             <div className="flex flex-col space-y-4">
-                                <a
+                                <a onClick={handleGoogle}
                                     href="#"
                                     className="flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-gray-800 rounded-md group hover:bg-gray-800 focus:outline-none"
                                 >
                                     <span>
-                                    <FcGoogle></FcGoogle> 
+                                        <FcGoogle></FcGoogle>
                                     </span>
                                     <span className="text-sm font-medium text-gray-800 group-hover:text-white">Google</span>
                                 </a>

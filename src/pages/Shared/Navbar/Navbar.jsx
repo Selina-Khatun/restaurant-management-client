@@ -1,21 +1,24 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import './Navbar.css';
+import { AuthContext } from '../../../Provider/AuthProvider';
 
 const Navbar = () => {
 
     // const { user, logOut } = useContext(AuthContext);
-    // // console.log(user);
-    // const handleLogout = () => {
-    //     console.log("Logging out...");
-    //     logOut()
-    //         .then(() => {
-    //             console.log("Logged out successfully.");
-    //         })
-    //         .catch(error => {
-    //             console.error("Log out error:", error);
-    //         });
-    // }
+    const { user, logOut,
+    } = useContext(AuthContext);
+    // console.log(user);
+    const handleLogout = () => {
+        console.log("Logging out...");
+        logOut()
+            .then(() => {
+                console.log("Logged out successfully.");
+            })
+            .catch(error => {
+                console.error("Log out error:", error);
+            });
+    }
 
     const navLinks = <>
 
@@ -51,26 +54,42 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                <button className='btn btn-outline btn-warning lg:text-white text-black'><NavLink to={'/login'}>Login</NavLink></button>
+                    {/* <button className='btn btn-outline btn-warning lg:text-white text-black'><NavLink to={'/login'}>Login</NavLink></button> */}
 
-                {/*  {user ? (
+                    {user ? (
                         <div className=' flex justify-center flex-wrap-reverse lg:mt-0 mt-10 items-center gap-3'>
                             <div className='flex flex-col flex-wrap'>
                                 <p className=' text-rose-600 lg:font-bold'>{user?.displayName} </p>
                                 <p className=' text-rose-600 lg:font-bold text-xs'>{user?.email} </p>
                             </div>
-                            <label tabIndex={0} className="btn btn-ghost btn-circle border-rose-300 avatar">
+                            {/* <label tabIndex={0} className="btn btn-ghost btn-circle border-rose-300 avatar">
                                 <div className="w-10 rounded-full">
                                     <img src={user?.photoURL} />
                                 </div>
-                            </label>
+                            </label> */}
+                            <div className="dropdown dropdown-end">
+                                <label tabIndex={0} className="btn btn-ghost btn-circle border-rose-300 avatar">
+                                    <div className="w-10 rounded-full">
+                                        <img src={user?.photoURL} />
+                                    </div>
+                                </label>
+                                <ul tabIndex={0} className="menu menu-sm dropdown-content z-30 p-2 shadow bg-base-100 rounded-box w-52">
+                                
+                                    <li><Link to={"/addedFood"}>My added food items</Link></li>
+                                    <li><Link to={"/addAFood"}>Add a food item</Link></li>
+                                    <li><Link to={"/orderedFood"}>My order food items</Link></li>
+                                </ul>
+                            </div>
+
+
+
                             <button onClick={handleLogout} className='btn btn-outline btn-error lg:text-white text-black'> log out</button>
 
                         </div>
                     ) : (
-                        <button className='btn btn-outline btn-error lg:text-white text-black'><NavLink to={'/login'}>Login</NavLink></button>
+                        <NavLink to={'/login'}> <button className='btn btn-outline btn-error lg:text-white text-black'>Login</button></NavLink>
 
-                    )} */}
+                    )}
                 </div>
             </nav>
         </div>
