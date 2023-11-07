@@ -10,6 +10,7 @@ import AddedFood from "../pages/Home/AddedFood/AddedFood";
 import AddFood from "../pages/Home/AddFood/AddFood";
 import OdderFood from "../pages/Home/OrderFood/OdderFood";
 import Details from "../pages/AllFoodItems/Details";
+import Purchase from "../pages/AllFoodItems/Purchase";
 
 
 const router = createBrowserRouter([
@@ -40,8 +41,12 @@ const router = createBrowserRouter([
                 element: <AllFoodItems></AllFoodItems>
             },
             {
-                path: "/details/:foodId",
+                path: "/details/:id",
                 element:<Details></Details>
+            },
+            {
+                path: "/purchase/:id",
+                element:<Purchase></Purchase>
             },
             {
                 path: "/blog",
