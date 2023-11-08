@@ -21,7 +21,7 @@ const FoodCard = (food) => {
 
                             <div className=" ">
                                 <div className="relative flex flex-row w-full h-10 mt-4 bg-transparent rounded-lg">
-                                    <label for=""
+                                    <label htmlFor=""
                                         className="w-full text-xl font-semibold text-gray-700 dark:text-gray-400">Quantity</label>
                                     <button
                                         className="w-20 h-full text-gray-600 bg-gray-300 rounded-l outline-none cursor-pointer dark:hover:bg-gray-700 dark:text-gray-400 hover:text-gray-700 dark:bg-gray-900 hover:bg-gray-400">

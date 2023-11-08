@@ -19,11 +19,11 @@ const Details = () => {
 
     }, [id, foods]);
     if (!selectedItem || Object.keys(selectedItem).length === 0) {
-        return <div><span classNameName="loading loading-spinner loading-sm"></span></div>;
+        return <div><span className="loading loading-spinner loading-sm"></span></div>;
     }
     const { _id, category, description, food_name, image, ingredients, making, origin, price, procedure } = selectedItem;
 
-    console.log(selectedItem);
+    // console.log(selectedItem);
 
     return (
         <div>
