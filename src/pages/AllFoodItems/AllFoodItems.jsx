@@ -49,7 +49,7 @@ const AllFoodItems = () => {
                 </div>
             </div>
 
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
 
 
             {filteredFoods.map((food) => (
@@ -63,6 +63,8 @@ const AllFoodItems = () => {
                         ingredients={food.ingredients}
                         making={food.making}
                         origin={food.origin}
+                        quantity={food.quantity}
+                        madeBy={food.madeBy}
                         price={food.price}
                         procedure={food.procedure}
                         food={food}

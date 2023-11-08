@@ -7,11 +7,11 @@ const Purchase = () => {
 
     const [selectedItem, setSelectedItem] = useState({});
     const { foods, user } = useContext(AuthContext);
-    const [quantity, setQuantity] = useState(1);
+    const [quantities, setQuantity] = useState(1);
     const { id } = useParams();
     // console.log(user);
-    // console.log('foods:', foods);
-    // console.log('ID:', id);
+    console.log('foods:', foods);
+    console.log('ID:', id);
 
     useEffect(() => {
         if (foods && id) {
@@ -24,29 +24,32 @@ const Purchase = () => {
     if (!selectedItem || Object.keys(selectedItem).length === 0) {
         return <div><span className="loading loading-spinner loading-sm"></span></div>;
     }
-    const { _id, category, description, food_name, image, ingredients, making, origin, price, procedure } = selectedItem;
+    const { _id, category, description, quantity, madeBy, food_name, image, ingredients, making, origin, price, procedure } = selectedItem;
     // console.log(selectedItem);
 
     const incrementQuantity = () => {
-        if (quantity < 20) {
-            setQuantity(quantity + 1);
+        if (quantities < 20) {
+            if (quantities === selectedItem.quantity) {
+                swal("You already have the maximum quantity and no more available .");
+            } else {
+                setQuantity(quantities + 1);
+            }
         } else {
             swal("You can't purchase more than 20 items.");
         }
     };
     const decrementQuantity = () => {
-        if (quantity > 1) {
-            setQuantity(quantity - 1);
+        if (quantities > 1) {
+            setQuantity(quantities - 1);
         }
     };
-
     const handlePurchaseItem = event => {
         event.preventDefault();
         const form = event.target;
         const food_name = form.food_name.value;
         const buyerName = form.buyerName.value;
         const price = form.price.value;
-        const quantity = form.quantity.value
+        const quantities = form.quantities.value
         const email = user?.email;
         const date = form.date.value;
         const purchaseItem = {
@@ -55,7 +58,7 @@ const Purchase = () => {
             buyerName,
             email,
             date,
-            quantity
+            quantities
         };
         // console.log(purchaseItem);
         fetch(`http://localhost:5000/purchased`, {
@@ -71,51 +74,28 @@ const Purchase = () => {
                 if (data.insertedId) {
                     swal({
                         title: "Good job!",
-                        text: " food item is successfully purchase!",
+                        text: " food item is successfully purchased!",
                         icon: "success",
                         button: "Aww yiss!",
 
                     });
                     form.reset();
-                }
-            })
-
-    }
-
-
+                };
+            });
+    };
     return (
         <div>
             purchase
 
             <section data-aos="fade-up" className="bg-white dark:bg-gray-900">
                 <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-                    <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">Update product</h2>
+                    <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">Purchase product</h2>
                     <form onSubmit={handlePurchaseItem}>
                         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
                             <div className="sm:col-span-2">
                                 <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Food Name</label>
                                 <input type="text" name="food_name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" defaultValue={food_name} required readOnly />
                             </div>
-
-                            {/* <div>
-                                    <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
-                                    <select id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" name='category' defaultValue={category} >
-                                        <option defaultValue="">Select category</option>
-                                        <option value="Makeup">soup</option>
-                                        <option value="Health">rice </option>
-                                        <option value="Beauty">tacos</option>
-                                        <option value="oil">Burger</option>
-                                        <option value="Cream">salad</option>
-                                        <option value="Cream">sea food</option>
-                                        <option value="Cream">sushi</option>
-                                        <option value="Cream">pasta</option>
-                                        <option value="Cream">curry</option>
-                                        <option value="Cream">pizza</option>
-                                        <option value="Cream">risotto</option>
-
-                                    </select>
-                                </div> */}
-
                             <div className="w-full">
                                 <label htmlFor="buyerName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Buyer Name</label>
                                 <input type="text" name="buyerName" defaultValue={user?.displayName} id="buyerName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="buyerName" required />
@@ -143,8 +123,8 @@ const Purchase = () => {
                                     </span>
                                     <input
                                         className="w-full p-0 bg-transparent border-0 text-gray-800 focus:ring-0 dark:text-white"
-                                        type="text" name='quantity'
-                                        value={quantity}
+                                        type="text" name='quantities'
+                                        value={quantities}
                                         readOnly
                                     />
                                 </div>

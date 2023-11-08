@@ -18,8 +18,10 @@ const Registration = () => {
         const password = form.password.value;
         const accepted = event.target.terms.checked
         // console.log(name, email, password, accepted);
+
+
         if (password.length < 6) {
-            swall('Password should be at least 6 characters or more.');
+            swal('Password should be at least 6 characters or more.');
             return;
         } else if (!/[A-Z]/.test(password)) {
             swal('Password must contain at least one capital letter.');
@@ -28,22 +30,65 @@ const Registration = () => {
             swal('Password must contain at least one special character (@, #, $, %, ^, &, +, or =).');
             return;
         } else if (!accepted) {
-            swal('Please accept our term and conditions!!!!')
-        } else {
+            swal('Please accept our terms and conditions!!!!');
+            return;
+        }
+        else {
 
             createUser(email, password)
                 .then(result => {
                     console.log(result.user);
-                    swal('Registration successful!');
+                    swal({
+                        title: "Good job!",
+                        text: " successfully registered ",
+                        icon: "success",
+                        button: "Aww yiss!",
+
+                    });
                 })
                 .catch(error => {
                     console.error(error);
                     swal('Email-already-in-use');
 
                 })
-            form.reset('');
-        }
 
+            const userinfo = {
+                userName: name,
+                email,
+            };
+            // console.log(purchaseItem);
+            fetch(`http://localhost:5000/users`, {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(userinfo)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    // if (data.insertedId) {
+                    //     swal({
+                    //         title: "Good job!",
+                    //         text: " successfully registered ",
+                    //         icon: "success",
+                    //         button: "Aww yiss!",
+
+                    //     });
+
+
+                    //     form.reset();
+                    // } else if (data.error === "user_exists") {
+                    //     swal({
+                    //         title: "Registration Error",
+                    //         text: "This email/user already exists.",
+                    //         icon: "error",
+                    //         button: "OK",
+                    //     });
+                    // }
+                })
+        }
+        form.reset('');
     }
     return (
         <div>
@@ -78,7 +123,7 @@ const Registration = () => {
                                         <input id="terms" aria-describedby="terms" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required />
                                     </div> */}
                                     <div className="ml-3 text-sm">
-                                    <input id="remember" aria-describedby="remember" type="checkbox" name='terms' className="bg-gray-50 border border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" />
+                                        <input id="remember" aria-describedby="remember" type="checkbox" name='terms' className="bg-gray-50 border border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required />
                                         <label htmlFor="remember" className="font-medium text-gray-900 dark:text-gray-300">  I agree the Terms and Conditions</label>
                                     </div>
                                 </div>

@@ -4,6 +4,8 @@
         "image": "https://i.ibb.co/9NrSsry/clark-douglas-k8-FXgs-DTm8g-unsplash.jpg",
         "category": "Pasta",
         "price": 12.99,
+        "madeBy": "author",
+        "quantity": 20,
         "origin": "Italy",
         "description": "Classic Italian pasta dish with a rich meat sauce.",
         "ingredients": "Ground beef, spaghetti, tomatoes, onions, garlic, spices",

@@ -21,7 +21,7 @@ const Details = () => {
     if (!selectedItem || Object.keys(selectedItem).length === 0) {
         return <div><span className="loading loading-spinner loading-sm"></span></div>;
     }
-    const { _id, category, description, food_name, image, ingredients, making, origin, price, procedure } = selectedItem;
+    const { _id, category,madeBy,quantity, description, food_name, image, ingredients, making, origin, price, procedure } = selectedItem;
 
     // console.log(selectedItem);
 
@@ -122,28 +122,31 @@ const Details = () => {
                                             </li>
                                         </ul>
                                         <p className="text-xs dark:text-gray-400 ">(2 customer reviews)</p>
+                                       
                                     </div>
                                     <p className="max-w-md mb-8 text-gray-700 dark:text-gray-400">
                                         <span className='text-2xl text-rose-500 font-semibold'>Description : <br /></span> {description}
                                     </p>
+                                    
                                     <p className="max-w-md mb-8 text-gray-700 dark:text-gray-400">
                                         <span className='text-2xl text-rose-500 font-semibold'> Ingredients : <br /></span>  {ingredients}
                                     </p>
+                                    <p className='text-xl font-semibold text-red-500 py-2'>Available quantity : {quantity}</p>
                                     <p className="max-w-md mb-8 text-gray-700 dark:text-gray-400">
                                         <span className="max-w-md mb-8 text-gray-700 dark:text-gray-400"> Procedure : <br /></span> {procedure}
                                     </p>
                                     <p className="inline-block mb-8 text-4xl font-bold text-gray-700 dark:text-gray-400 ">
-                                        <span> Price :{price} $</span>
+                                        <span> Price : {price} $</span>
                                     </p>
                                     <p className="text-green-600 dark:text-green-300 ">stock  in </p>
                                 </div>
                                 <div className="flex items-center mb-8">
                                     <h2 className=" mr-6 text-xl font-bold dark:text-gray-400">
-                                        Category :{category}</h2>
+                                        Category : {category}</h2>
 
                                 </div>
                                 <h2 className=" text-xl pb-4 font-bold text-rose-500">
-                                    Made by : </h2>
+                                    Made by : {madeBy} </h2>
                                 <div className="flex items-center mb-8">
                                     <h2 className=" text-xl font-bold dark:text-gray-400">
                                         Origin :  {origin}</h2>

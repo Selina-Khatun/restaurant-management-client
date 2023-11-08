@@ -57,7 +57,7 @@ const Navbar = () => {
                     {/* <button className='btn btn-outline btn-warning lg:text-white text-black'><NavLink to={'/login'}>Login</NavLink></button> */}
 
                     {user ? (
-                        <div className=' flex justify-center flex-wrap-reverse lg:mt-0 mt-10 items-center gap-3'>
+                        <div className=' flex justify-center lg:mt-0 mt-10 items-center gap-3'>
                             <div className='flex flex-col flex-wrap'>
                                 <p className=' text-rose-600 lg:font-bold'>{user?.displayName} </p>
                                 <p className=' text-rose-600 lg:font-bold text-xs'>{user?.email} </p>
@@ -73,8 +73,8 @@ const Navbar = () => {
                                         <img src={user?.photoURL} />
                                     </div>
                                 </label>
-                                <ul tabIndex={0} className="menu menu-sm dropdown-content z-30 p-2 shadow bg-base-100 rounded-box w-52">
-                                
+                                <ul tabIndex={0} className="menu menu-sm dropdown-content z-30 p-2 shadow bg-base-100 rounded-box w-52 -mt-2">
+
                                     <li><Link to={"/addedFood"}>My added food items</Link></li>
                                     <li><Link to={"/addAFood"}>Add a food item</Link></li>
                                     <li><Link to={"/orderedFood"}>My order food items</Link></li>
