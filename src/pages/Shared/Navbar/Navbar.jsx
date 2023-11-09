@@ -62,11 +62,6 @@ const Navbar = () => {
                                 <p className=' text-rose-600 lg:font-bold'>{user?.displayName} </p>
                                 <p className=' text-rose-600 lg:font-bold text-xs'>{user?.email} </p>
                             </div>
-                            {/* <label tabIndex={0} className="btn btn-ghost btn-circle border-rose-300 avatar">
-                                <div className="w-10 rounded-full">
-                                    <img src={user?.photoURL} />
-                                </div>
-                            </label> */}
                             <div className="dropdown dropdown-end">
                                 <label tabIndex={0} className="btn btn-ghost btn-circle border-rose-300 avatar">
                                     <div className="w-10 rounded-full">

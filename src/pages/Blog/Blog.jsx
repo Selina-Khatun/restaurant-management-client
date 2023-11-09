@@ -2,7 +2,7 @@ import React from 'react';
 
 const Blog = () => {
     return (
-        <div className='shadow-2xl rounded-2xl my-10 p-10'>
+        <div className='shadow-2xl rounded-2xl mt-10  my-10 p-10'>
             <h1 className='text-2xl font-bold py-5'> What is One way data binding?</h1>
             <p className='border-y-2 py-5 '>One-way data binding is a unidirectional data flow in web development. It ensures that data changes in the model (source) are reflected in the view (UI) but not the other way around. In this approach, the model is the single source of truth, and any changes to it automatically update the UI components, promoting data consistency. One-way data binding reduces complexity and makes it easier to manage and debug applications. Popular frameworks like React and Angular employ this approach to build interactive user interfaces. </p>
            

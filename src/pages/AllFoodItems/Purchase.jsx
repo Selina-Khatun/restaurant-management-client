@@ -10,8 +10,8 @@ const Purchase = () => {
     const [quantities, setQuantity] = useState(1);
     const { id } = useParams();
     // console.log(user);
-    console.log('foods:', foods);
-    console.log('ID:', id);
+    // console.log('foods:', foods);
+    // console.log('ID:', id);
 
     useEffect(() => {
         if (foods && id) {
@@ -47,6 +47,7 @@ const Purchase = () => {
         event.preventDefault();
         const form = event.target;
         const food_name = form.food_name.value;
+        const photo = form.photo.value;
         const buyerName = form.buyerName.value;
         const price = form.price.value;
         const quantities = form.quantities.value
@@ -57,6 +58,7 @@ const Purchase = () => {
             price: price,
             buyerName,
             email,
+            photo,
             date,
             quantities
         };
@@ -85,16 +87,18 @@ const Purchase = () => {
     };
     return (
         <div>
-            purchase
-
-            <section data-aos="fade-up" className="bg-white dark:bg-gray-900">
-                <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+            <section  className="bg-white dark:bg-gray-900">
+                <div data-aos="fade-up" className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
                     <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">Purchase product</h2>
                     <form onSubmit={handlePurchaseItem}>
                         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
                             <div className="sm:col-span-2">
                                 <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Food Name</label>
                                 <input type="text" name="food_name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" defaultValue={food_name} required readOnly />
+                            </div>
+                            <div className="sm:col-span-2">
+                                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product photo</label>
+                                <input type="url" name="photo" defaultValue={image} id="photo" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder=" https://example.com" required readOnly />
                             </div>
                             <div className="w-full">
                                 <label htmlFor="buyerName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Buyer Name</label>

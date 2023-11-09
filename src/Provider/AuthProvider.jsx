@@ -12,11 +12,18 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [foods, setFoods] = useState();
+const [orders,setOrders]=useState();
+
 
     useEffect(() => {
         fetch('http://localhost:5000/foods')
             .then(res => res.json())
             .then(data => setFoods(data));
+    }, [])
+    useEffect(() => {
+        fetch('http://localhost:5000/purchased?email=${user?.email}')
+            .then(res => res.json())
+            .then(data => setOrders(data));
     }, [])
 
     const googleSignIn = (value) => {
@@ -60,6 +67,8 @@ const AuthProvider = ({ children }) => {
         googleSignIn,
         logOut,
         foods,
+        orders,
+
     }
     return (
         <AuthContext.Provider value={authInfo}>

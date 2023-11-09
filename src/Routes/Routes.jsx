@@ -11,6 +11,7 @@ import AddFood from "../pages/Home/AddFood/AddFood";
 import OdderFood from "../pages/Home/OrderFood/OdderFood";
 import Details from "../pages/AllFoodItems/Details";
 import Purchase from "../pages/AllFoodItems/Purchase";
+import PrivateRoute from "./PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/purchase/:id",
-                element:<Purchase></Purchase>
+                element:<PrivateRoute><Purchase></Purchase></PrivateRoute>
             },
             {
                 path: "/blog",
