@@ -1,28 +1,36 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../../../Provider/AuthProvider';
 
 const Favorites = () => {
+    const { foods } = useContext(AuthContext);
+    console.log(foods)
+    const displayedProducts = foods?.slice(0, 4);
     return (
-        <div className='my-5'>
-            <h1 className='text-4xl font-bold text-red-500 underline border-b-2 text-center '>
+        <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 py-10 gap-5'>
+      
+    
+                    {
+                        displayedProducts?.map(food => (<div className='mt-10'>
+                            <div key={food._id} className="card card-compact bg-base-100 shadow-xl">
+                                <figure><img className=' h-60 transition duration-400 hover:scale-105' src={food.image} alt={food.image} /></figure>
+                                <div className="card-body">
+                                    <h2 className="card-title">{food.food_name}</h2>
+                                    <p>{food.category}</p>
+                                    <p>{food.price}</p>
+                                    <div className="card-actions justify-end">
+                                        <NavLink to={"/allFoodItems"}> <button className="btn btn-warning btn-outline font-bold text-slate-100"> Details</button></NavLink>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>))
+                    }
+
+                    Most Favorites Items
+             
 
 
-                Most Favorites Items
-            </h1>
-
-            <div className='mt-10'>
-                <div className="card card-compact w-96 bg-base-100 shadow-xl">
-                    <figure><img className='transition duration-400 hover:scale-105' src="https://i.ibb.co/J5WQZ5M/sour-curry-with-snakehead-fish-spicy-garden-hot-pot-thai-food-1150-26407.jpg" alt="Shoes" /></figure>
-                    <div className="card-body">
-                        <h2 className="card-title">name</h2>
-                        <p>category</p>
-                        <p>price</p>
-                        <div className="card-actions justify-end">
-                        <NavLink to={"/allFoodItems"}> <button className="btn btn-warning btn-outline font-bold text-slate-100"> Details</button></NavLink>
-                        </div>
-                    </div>
-                </div>
-            </div>
+         
         </div>
     );
 };

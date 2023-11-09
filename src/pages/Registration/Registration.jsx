@@ -57,7 +57,7 @@ const Registration = () => {
                 email,
             };
             // console.log(purchaseItem);
-            fetch(`http://localhost:5000/users`, {
+            fetch(`https://restaurant-management-server-five.vercel.app/users`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

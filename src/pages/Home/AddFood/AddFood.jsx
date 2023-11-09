@@ -19,7 +19,7 @@ const AddFood = () => {
         const description = form.description.value;
         const newProduct = { name, photo, category, quantity, price, addByName, email, origin, description };
         console.log(newProduct);
-        fetch('http://localhost:5000/myItems', {
+        fetch('https://restaurant-management-server-five.vercel.app/myItems', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

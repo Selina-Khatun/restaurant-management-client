@@ -63,7 +63,7 @@ const Purchase = () => {
             quantities
         };
         // console.log(purchaseItem);
-        fetch(`http://localhost:5000/purchased`, {
+        fetch(`https://restaurant-management-server-five.vercel.app/purchased`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

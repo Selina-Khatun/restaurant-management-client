@@ -4,11 +4,11 @@ import FoodRow from './FoodRow';
 import swal from 'sweetalert';
 
 const OdderFood = () => {
-    const { user } = useContext(AuthContext);
+    const { user } =useContext(AuthContext);
     const [ordered, setOrdered] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/purchased?email=${user?.email}`)
+        fetch(`https://restaurant-management-server-five.vercel.app/purchased?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setOrdered(data));
     }, [])
@@ -23,7 +23,7 @@ const OdderFood = () => {
             .then((willDelete) => {
                 if (willDelete) {
                     console.log('Deleting item with ID:', id);
-                    fetch(`http://localhost:5000/purchased/${id}`, {
+                    fetch(`https://restaurant-management-server-five.vercel.app/purchased/${id}`, {
                         method: 'DELETE'
                     })
                         .then((res) => res.json())

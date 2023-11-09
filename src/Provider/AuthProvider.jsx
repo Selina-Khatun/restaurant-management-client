@@ -17,19 +17,19 @@ const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        fetch('http://localhost:5000/foods')
+        fetch('https://restaurant-management-server-five.vercel.app/foods')
             .then(res => res.json())
             .then(data => setFoods(data));
     }, [])
 
     useEffect(() => {
-        fetch('http://localhost:5000/purchased?email=${user?.email}')
+        fetch('https://restaurant-management-server-five.vercel.app/purchased?email=${user?.email}')
             .then(res => res.json())
             .then(data => setOrders(data));
     }, [])
 
     useEffect(() => {
-        fetch('http://localhost:5000/myItems')
+        fetch('https://restaurant-management-server-five.vercel.app/myItems')
             .then(res => res.json())
             .then(data => setMyItems(data));
     }, [])
