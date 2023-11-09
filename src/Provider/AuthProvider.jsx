@@ -12,7 +12,8 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [foods, setFoods] = useState();
-const [orders,setOrders]=useState();
+    const [orders, setOrders] = useState();
+    const [myItems, setMyItems] = useState();
 
 
     useEffect(() => {
@@ -20,12 +21,18 @@ const [orders,setOrders]=useState();
             .then(res => res.json())
             .then(data => setFoods(data));
     }, [])
+
     useEffect(() => {
         fetch('http://localhost:5000/purchased?email=${user?.email}')
             .then(res => res.json())
             .then(data => setOrders(data));
     }, [])
 
+    useEffect(() => {
+        fetch('http://localhost:5000/myItems')
+            .then(res => res.json())
+            .then(data => setMyItems(data));
+    }, [])
     const googleSignIn = (value) => {
         setLoading(true);
         return signInWithPopup(auth, googleProvider);
@@ -68,6 +75,7 @@ const [orders,setOrders]=useState();
         logOut,
         foods,
         orders,
+        myItems,
 
     }
     return (
